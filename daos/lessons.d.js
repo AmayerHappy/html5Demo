@@ -14,6 +14,7 @@ module.exports = {
     findById: findById,
     findBySomeone: findBySomeone,
     findAllByPages: findAllByPages,
+    findAll: findAll
     //deleteById: deleteById,
     //update: update
 };
@@ -45,6 +46,14 @@ function findAllByPages(page){
     return lessons.findAll({
         offset: page.offset,
         limit: page.limit,
+        order: [
+            ['updated_at', 'DESC']
+        ]
+    });
+}
+
+function findAll(){
+    return lessons.findAll({
         order: [
             ['updated_at', 'DESC']
         ]

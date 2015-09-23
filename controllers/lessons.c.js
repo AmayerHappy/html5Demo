@@ -11,13 +11,15 @@ module.exports = {
     createLesson: createLesson,
     getLessonById: getLessonById,
     getLessonsPagesBySomeone: getLessonsPagesBySomeone,
-    getLessonsPages: getLessonsPages
+    getLessonsPages: getLessonsPages,
+    getLessonsList: getLessonsList
 };
 
 function createLesson(req, res, next) {
     var lesson = req.body;
-    lessonsService
-        .createWinInfo(lesson) //promise
+    logger.info(lesson);
+
+    lessonsService.createLesson(lesson) //promise
         .then(function (result) {
             res.status(201).json(result);
         })
@@ -67,6 +69,16 @@ function getLessonsPages(req, res, next){
         "limit": limitNum
     }
     lessonsService.getLessonsPages(page)
+        .then(function (lessons) {
+            res.json(lessons);
+        })
+        .catch(function (err) {
+            next(err);
+        });
+}
+
+function getLessonsList(req, res, next){
+    lessonsService.getLessonsList()
         .then(function (lessons) {
             res.json(lessons);
         })

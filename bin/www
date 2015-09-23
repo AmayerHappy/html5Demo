@@ -8,12 +8,14 @@ var app = require('../app');
 var debug = require('debug')('html5Demo:server');
 var http = require('http');
 var logger = require('../logger').app;
+var config = global.config;
+
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8016');
+var port = normalizePort( config.SERVER_PORT || '8016');
 app.set('port', port);
 
 /**

@@ -47,6 +47,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand topnav" href="#">Start ...</a>
+            <a class="navbar-brand topnav" id="token">Get Token</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -76,6 +77,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="intro-message">
+                    <h3 id="token_view"></h3>
                     <h1>Html5 Demo</h1>
                     <h3>Html5初体验</h3>
                     <hr class="intro-divider">
@@ -231,6 +233,16 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="javascripts/bootstrap.min.js"></script>
+<script>
+    $(function(){
+        $('#token').click(function(){
+            $.getJSON('/api/we_chat/', function (data) {
+                console.log(data);
+                $("#token_view").text(data);
+            });
+        });
+    });
+</script>
 
 </body>
 

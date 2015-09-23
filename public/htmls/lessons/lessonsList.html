@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .owBack {
+            background-color: #434a54;
+            padding: 30px 15px;
+        }
+        .owWrap {
+            margin: 0px auto;
+            column-count: 5;
+            column-gap: 30px;
+        }
+        .owUnit {
+            border-radius: 3px;
+            display: inline-block;
+            background-color: #ecf0f1;
+            margin-bottom: 30px;
+            padding: 20px;
+            width: 100%;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+        .owUnit h3 {
+            color: #222;
+        }
+        .owUnit p {
+            color: #444;
+        }
+
+        @media (max-width: 1800px) {
+            .owWrap {
+                margin: 0px auto;
+                column-count: 4;
+                column-gap: 30px;
+            }
+        }
+        @media (max-width: 1400px) {
+            .owWrap {
+                margin: 0px auto;
+                column-count: 3;
+                column-gap: 30px;
+            }
+        }
+        @media (max-width: 1100px) {
+            .owWrap {
+                margin: 0px auto;
+                column-count: 2;
+                column-gap: 30px;
+            }
+        }
+        @media (max-width: 600px) {
+            .owWrap {
+                margin: 0px auto;
+                column-count: 1;
+                column-gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+<section class="owBack">
+    <div class="container-fluid owWrap">
+    </div>
+    <!--/.container-->
+</section>
+</body>
+<!-- jQuery -->
+<script src="../../javascripts/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../../javascripts/bootstrap.min.js"></script>
+<script>
+    $(function(){
+        getLessonsList();
+        function getLessonsList() {
+            $.getJSON('/api/lessons/query/all/', function (data) {
+                $(data).each(function (index) {
+                    $(".container-fluid").append("<div class=\"owUnit\" id=\"" + data[index].id + "\"><h3>" +  data[index].title + "</h3><p>" + data[index].description +"</p></div>");
+                });
+                $(".owUnit").click(function () {
+                    var id = $(".owUnit").attr("id");
+                    console.log(id);
+                    window.location.href="viewLesson.html?id="+id;
+                });
+            });
+        }
+    });
+
+</script>
+
+</html>

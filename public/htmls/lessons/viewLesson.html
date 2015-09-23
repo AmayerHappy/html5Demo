@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body,
+        html {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ecf0f1;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .container {
+            /*width: 350px;*/
+            /*height: 400px;*/
+            background-size: cover;
+            background-position: center center;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: flex-end;
+            align-items: center;
+            box-shadow: 0 2px 1px rgba(0, 0, 0, .1);
+            overflow: hidden;
+        }
+        .container h1 {
+            margin: auto;
+            width: 105%;
+            -webkit-transform: translateX(-2.5%);
+            text-align: center;
+            padding: 2.2em 0;
+            padding-bottom: 60px;
+            border-radius: 2px;
+            color: #2c7261;
+            background: rgba(255, 255, 255, .95);
+            font-size: 2.5em;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            text-shadow: 0 2px white;
+            box-shadow: 0 2px 1px rgba(0, 0, 0, .1);
+            margin-top: 1em;
+            transition: all 0.3s ease-in-out;
+        }
+        .container .desc {
+            position: relative;
+            background: rgba(255, 255, 255, .95);
+            width: 100%;
+            padding: 1em;
+            letter-spacing: 1.2px;
+            line-height: 1.5em;
+            font-family: sans-serif;
+            margin: 0;
+            transition: all 0.3s ease-in-out;
+            top: 0px;
+
+        }
+        .desc span {
+            font-size: 0.8em;
+            color: gray;
+        }
+        .date {
+            float: right;
+        }
+
+    </style>
+</head>
+<body>
+
+</body>
+
+<!-- jQuery -->
+<script src="../../javascripts/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../../javascripts/bootstrap.min.js"></script>
+<script src="../../javascripts/ejs.js"></script>
+<script id="lessons" type="text/template">
+    <div class="container">
+        <h1>【<%= lesson.catalog %>】<%= lesson.title %></h1>
+        <div class="desc">
+            <span><%= lesson.author %>-<%= lesson.department %></span>
+            <span><%= lesson.is_published %></span>
+            <span class="date"><%= lesson.created_at %></span>
+            <article>
+                <h2>问题描述</h2>
+                <p><%= lesson.description %></p>
+            </article>
+            <article>
+                <h2>问题原因</h2>
+                <p><%= lesson.reason %></p>
+            </article>
+            <article>
+                <h2>解决方法</h2>
+                <p><%= lesson.solution %></p>
+            </article>
+    </div>
+</script>
+<script>
+    $(function(){
+        var hrefArr = window.location.href.split("?");
+        var params = hrefArr[1].split("=");
+        var id = params[1];
+        var lessons = document.getElementById('lessons').innerHTML;
+        $.getJSON('/api/lessons/' + id, function (lesson) {
+            var html = ejs.render(lessons, { lesson: lesson });
+            document.body.innerHTML = html;
+        });
+
+    });
+</script>
+</html>

@@ -58,6 +58,9 @@ service.setLevel('Debug');
 var dao = log4js.getLogger('dao');
 dao.setLevel('Debug');
 
+var sign = log4js.getLogger('sign');
+sign.setLevel('Debug');
+
 var error = log4js.getLogger('error');
 error.setLevel('Debug');
 
@@ -72,6 +75,7 @@ module.exports = {
     controller: controller,
     service: service,
     dao: dao,
+    sign: sign,
     error: error,
     uncaughtException: uncaughtException
 };

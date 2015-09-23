@@ -2,3 +2,24 @@ sudo /Applications/XAMPP/xamppfiles/bin/mysql.server start
 
 scp -r html5Demo mpsp@10.10.67.132:/home/mpsp/woosa/ --exclude html5Demo/conf
 scp -r html5Demo/public/htmls/guaguaka.html mpsp@10.10.67.132:/home/mpsp/woosa/html5Demo/public/htmls/
+
+scp -r controllers daos models public routes services utils mpsp@10.10.67.132:/home/mpsp/woosa/html5Demo/
+scp -r node_modules/jssha mpsp@10.10.67.132:/home/mpsp/woosa/html5Demo/node_modules/
+scp -r node_modules/urlencode mpsp@10.10.67.132:/home/mpsp/woosa/html5Demo/node_modules/
+scp -r conf controllers daos models public routes services utils app.js mpsp@10.10.67.132:/home/mpsp/woosa/html5Demo/
+scp -r services controllers mpsp@10.10.67.132:/home/mpsp/woosa/html5Demo/
+scp -r public/htmls/guaguaka.html mpsp@10.10.67.132:/home/mpsp/woosa/html5Demo/public/htmls/
+
+
+
+
+
+scp -r public/htmls/lessons mpsp@10.10.67.132:/home/mpsp/woosa/html5Demo/public/htmls/
+sudo /Applications/XAMPP/xamppfiles/bin/mysql.server start
+sudo /usr/local/bin/mysql.server start
+
+
+/api/we_chat/verify/?signature=12414d39d1e95fef078429c5714324db3673265c&echostr=8384033737254358973&timestamp=1440992189&nonce=1310680300
+ln -s /Users/woosa/PhpStormProjects/weimik  /Applications/XAMPP/htdocs/weimik
+
+

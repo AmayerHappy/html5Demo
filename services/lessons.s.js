@@ -14,7 +14,8 @@ module.exports = {
     createLesson: createLesson,
     getLessonById: getLessonById,
     getLessonsPagesBySomeone: getLessonsPagesBySomeone,
-    getLessonsPages: getLessonsPages
+    getLessonsPages: getLessonsPages,
+    getLessonsList: getLessonsList
 };
 
 function createLesson(lesson){
@@ -31,4 +32,8 @@ function getLessonsPagesBySomeone(pramas){
 
 function getLessonsPages(page){
     return lessonsDao.findAllByPages(page);
+}
+
+function getLessonsList(){
+    return lessonsDao.findAll();
 }

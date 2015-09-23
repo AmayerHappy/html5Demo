@@ -2,14 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>刮刮卡</title>
 
     <link href="../stylesheets/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../stylesheets/iconfont.css">
     <link rel="stylesheet" type="text/css" href="../stylesheets/main.css"/>
 
-    <link rel="shortcut icon" type="image/x-icon" href="../images/iconfont-guaguaqia.ico" media="screen"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/iconfont-guaguaqia.png" media="screen"/>
 
     <!--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
     <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>-->
@@ -54,8 +54,8 @@
             <div class="panel panel-info">
                 <div class="panel-heading">奖项设置</div>
                 <div class="panel-body">
-                    <ol class="prize_set">
-                    </ol>
+                    <table id="prize_set" class="table">
+                    </table>
                 </div>
             </div>
         </div>
@@ -64,8 +64,8 @@
             <div class="panel panel-danger">
                 <div class="panel-heading">中奖情况</div>
                 <div class="panel-body">
-                    <ol class="prize_result">
-                    </ol>
+                    <table id="prize_result" class="table">
+                    </table>
                 </div>
             </div>
         </div>
@@ -76,12 +76,19 @@
 
 
 
-<script src="../javascripts/jquery.min.js"></script>
+<script src="../javascripts/jquery.js"></script>
 <script src="../javascripts/jquery.eraser.js"></script>
+<script src="../javascripts/moment.js"></script>
 <script type="text/javascript">
 
     $(function () {
 
+        var hrefArr = window.location.href.split('?');
+        var params = hrefArr[1].split('&');
+        var openid = params[0].split('=')[1];
+        var nickname = params[1].split('=')[1];
+        var headimgurl = params[2].split('=')[1];
+//        console.log('openid:'+openid+',nickname:'+nickname +',headimgurl:'+headimgurl);
 
         var imgs = ['../images/ggk_1.png', '../images/ggk_2.png', '../images/ggk_3.png', '../images/ggk_4.png', '../images/ggk_5.png', '../images/ggk_6.png'];
         var prize;
@@ -167,6 +174,9 @@
                 method: 'POST',
                 data: {
                     user_id: $('#mobile').val(),
+                    open_id: openid,
+                    nick_name: nickname,
+                    head_img_url: headimgurl,
                     prize_id: Number($("#num").val())+1,
                     prize_name: prize.name,
                     is_get: 0
@@ -186,22 +196,24 @@
         function getPrizeSet() {
             $.getJSON('/api/prize_info/name/guaguaka', function (data) {
                 $(data).each(function (index) {
-                    $(".prize_set").append("<li>" + data[index].description + ":" + data[index].content + ", 数量:" + data[index].limits + "台。</li>");
+                    $("#prize_set").append("<tr><td>" + data[index].description + "</td><td>" + data[index].content + "</td><td>" + data[index].limits + "台</td></tr>");
                 });
             });
         }
 
         function getPrizeResult() {
             $.getJSON('/api/win_info/prize_name/guaguaka', function (data) {
-                $(".prize_result").html('');
+                $("#prize_result").html('');
                 $(data).each(function (index) {
                     $.getJSON("/api/prize_info/" + data[index].prize_id, function (priz) {
-//                        console.log(data[index].prize_id);
-                        $(".prize_result").append("<li>用户" + data[index].user_id.substring(0, 3) +"****" + data[index].user_id.substring(7, 11) + "获得" + priz.content + "</li>");
+                        console.log(data[index].id  + '------' + data[index].created_at);
+                        $("#prize_result").append('<tr><td><img src=\"' + data[index].head_img_url +'\" class=\"img-circle\" style=\"width: 30px; height:30px;\"/></td><td>' + decodeURI(data[index].nick_name) + '</td><td>' + priz.content + '</td><td>' + moment(data[index].created_at).format("YYYY-MM-DD HH:mm:ss") +"</td></tr>");
                     });
                 });
             });
         }
+
+
     });
 
 </script>

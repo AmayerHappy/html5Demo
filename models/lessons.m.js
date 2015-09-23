@@ -19,7 +19,8 @@ module.exports = db.define('lessons', {
         catalog: Sequelize.STRING,
         author: Sequelize.STRING,
         created_at: Sequelize.DATE,
-        updated_at: Sequelize.DATE
+        updated_at: Sequelize.DATE,
+        is_published: Sequelize.INTEGER
     }, {
         underscored: true,
         tableName: 'lessons'

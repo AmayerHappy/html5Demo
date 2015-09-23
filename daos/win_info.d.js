@@ -86,7 +86,7 @@ function findByUserId(userId) {
 }
 
 function findByPrizeName(prizeName) {
-    logger.info(prizeName);
+    logger.debug(prizeName);
     return winInfo.findAll({
         where: {
             prize_name: prizeName

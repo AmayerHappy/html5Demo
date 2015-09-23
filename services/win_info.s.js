@@ -8,6 +8,7 @@ var logger = require('../logger').service;
 var errors = require('../errors');
 
 var winInfoDao = require('../daos/win_info.d');
+var prizeInfoDao = require('../daos/prize_info.d');
 
 
 module.exports = {

@@ -1,86 +1,50 @@
 <!DOCTYPE html>
-<html>
 <head lang="en">
     <meta charset="UTF-8">
+    <link href="../stylesheets/bootstrap.min.css" rel="stylesheet">
+
     <title></title>
     <style>
-        #redux {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            z-index: 2;
+
+        .wrapper {
+        .make-row();
+        }
+        .content-main {
+        .make-lg-column(12);
+        }
+        .content-secondary {
+        .make-lg-column(3);
+        .make-lg-column-offset(1);
         }
 
     </style>
 </head>
 <body>
-
-
-<!--<img id="robot" src="../images/ggk_1.png" />-->
-<img id="base" />
-<img id="redux" src="../images/cover.png" />
-<div id="progress">0%</div>
+<div class="wrapper">
+    <div class="content-main">...</div>
+    <div class="content-secondary">...</div>
 </div>
 
-<div id="data">
-</div>
-<!--<button onclick="test()">testttt</button>-->
 </body>
-<script src='../javascripts/jquery.min.js' type='text/javascript'></script>
-<script src='../javascripts/jquery.eraser.js' type='text/javascript'></script>
-<script type="text/javascript">
+<script>
 
+//    var hrefArr = window.location.href.split('?');
 
+    var url = 'http://oooops.ddns.net/htmls/guaguaka.html?openid=oJieotwKvEZ2mER7ekpxVZ6kP56w&nickname=woosa&headimgurl=http://wx.qlogo.cn/mmopen/ajNVdqHZLLAPz0K9aLGZCiayz2dtM5lK3mgCOMNoc6IhLjTYbMuL025qj0LiaO2roC9ibjf671HdVeqsEicqKsYHQA/0';
 
-
-    $(function(){
-
-
-        var sum = 60;
-        console.log(Math.floor(Math.random()*sum));
-
-
-//        $("#data").text("123456");
-        var num = 1;
-        $.getJSON("/api/prize_info/:" + num, function(prize){
-
-            console.log(prize);
-            console.log(prize[0]);
-            console.log(prize.content);
-            $("#data").text(prize.description);
-
-
-        });
-
-        $(document).ready(function() {
-            var imgs = ['../images/ggk_1.png', '../images/ggk_2.png', '../images/ggk_3.png', '../images/ggk_4.png', '../images/ggk_5.png'];
-            var num = Math.floor(Math.random() * 5);
-            $("#base").attr("src", imgs[num]);
-        });
-
-        $('#redux').eraser({
-            progressFunction: function(p) {
-                $('#progress').html(Math.round(p*100)+'%');
-            }
-        });
-
-        $('#resetBtn').click(function(event) {
-            $('#redux').eraser('reset');
-            $('#progress').html('0%');
-            event.preventDefault();
-        });
-
-        $('#clearBtn').click(function(event) {
-            $('#redux').eraser('clear');
-            $('#progress').html('100%');
-            event.preventDefault();
-        });
-
-
-
-
-    });
-
-
+    var hrefArr = url.split('?');
+    console.log('hrefArr:'+hrefArr);
+    console.log('hrefArr[1]:'+hrefArr[1]);
+    var params = hrefArr[1].split('&');
+    console.log('params:'+params);
+    console.log('params[0]:'+params[0]);
+    console.log('params[1]:'+params[1]);
+    console.log('params[2]:'+params[2]);
+    var openid = params[0].split('=')[1];
+    var nickname = params[1].split('=')[1];
+    var headimgurl = params[2].split('=')[1];
+    console.log('openid:'+openid);
+    console.log('nickname:'+nickname);
+    console.log('headimgurl:'+headimgurl);
 </script>
 </html>

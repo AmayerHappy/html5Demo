@@ -17,7 +17,6 @@ module.exports = {
 
 
 function createWinInfo(req, res, next) {
-    console.log('testssssssssss')
     var winInfo = req.body;
     winInfoService
         .createWinInfo(winInfo) //promise
@@ -31,7 +30,7 @@ function createWinInfo(req, res, next) {
 
 function getWinInfo(req, res, next) {
     var id = req.params.id;
-    logger.info(id);
+    logger.debug(id);
 
     winInfoService.getWinInfoById(id)
         .then(function (result) {
@@ -44,7 +43,7 @@ function getWinInfo(req, res, next) {
 
 function getWinInfos(req, res, next) {
     var userId = req.params.user_id;
-    logger.info(userId);
+    logger.debug(userId);
     winInfoService.getWinInfoByUserId(userId)
         .then(function (winInfos) {
             res.json(winInfos);
@@ -57,7 +56,7 @@ function getWinInfos(req, res, next) {
 
 function getWinInfosByPrizeName(req, res, next) {
     var prizeName = req.params.prize_name;
-    logger.info(prizeName);
+    logger.debug(prizeName);
     winInfoService.getWinInfosByPrizeName(prizeName)
         .then(function (winInfos) {
             res.json(winInfos);
@@ -76,7 +75,7 @@ function getSumWinInfosByPrizeName(req, res, next) {
         "prize_id": prizeId
     }
 
-    logger.info(prizeName);
+    logger.debug(prizeName);
     winInfoService.getSumWinInfosByPrizeName(winPrize)
         .then(function (winInfos) {
             res.json(winInfos);
